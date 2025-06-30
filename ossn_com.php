@@ -176,5 +176,33 @@ function diploma_upload_page_handler($pages) {
 	echo ossn_view_page($title, $content);
 }
 
+function diploma_handle_upload_logic($user) {
+    // Case 1: Account already verified
+    if (empty($user->activation)) {
+		return ossn_view_page(ossn_print('diploma:upload:title'), ossn_plugin_view('output/ok', array('text' => ossn_print('diploma:alreadyverified'))));
+    }
+    
+    // Case 2: Check for existing diploma
+    $diploma = Diploma::getByUserGuid($user->guid);
+    if ($diploma) {
+		// If diploma exists, show message
+		ossn_trigger_message(ossn_print('diploma:waitingadmin'), 'success');
+		redirect(REF);
+	}
+    
+    // Case 3: Show upload form
+	$params = array(
+					'content' => ossn_view_form('add', array(
+												'action' => ossn_site_url() . 'action/diploma/add',
+												'component' => 'StaffDiplomaVerifier',
+												'class' => 'ossn-ads-form',
+												'params' => array('user_guid' => $user->guid, 
+																  'token' => substr($user->activation, 0, 10)
+	 				 								)
+										), false));
+									
+		
+		return ossn_plugin_view('diploma/upload', array('form' => $params['content'], 'user_guid' => $user->guid, 'user_token' => substr($user->activation, 0, 10)));
+}
 
 ossn_register_callback('ossn', 'init', 'com_staff_diploma_verifier_init');
