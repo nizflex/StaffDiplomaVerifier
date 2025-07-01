@@ -179,14 +179,14 @@ function diploma_upload_page_handler($pages) {
 function diploma_handle_upload_logic($user) {
     // Case 1: Account already verified
     if (empty($user->activation)) {
-		return ossn_view_page(ossn_print('diploma:upload:title'), ossn_plugin_view('output/ok', array('text' => ossn_print('diploma:alreadyverified'))));
+		return ossn_view_page(ossn_print('staff:dipverif:diploma:upload:title'), ossn_plugin_view('output/ok', array('text' => ossn_print('staff:dipverif:diploma:alreadyverified'))));
     }
-    
+   
     // Case 2: Check for existing diploma
     $diploma = Diploma::getByUserGuid($user->guid);
     if ($diploma) {
 		// If diploma exists, show message
-		ossn_trigger_message(ossn_print('diploma:waitingadmin'), 'success');
+		ossn_trigger_message(ossn_print('staff:dipverif:diploma:waitingadmin'), 'success');
 		redirect(REF);
 	}
     

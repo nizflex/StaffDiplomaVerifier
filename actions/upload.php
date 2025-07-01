@@ -19,7 +19,7 @@ $user_guid = (int) input('user_guid');
 $user      = ossn_user_by_guid($user_guid);
 
 if (!$user) {
-    ossn_trigger_message(ossn_print('diploma:usernotfound'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:usernotfound'), 'error');
     redirect(REF);
 }
 
@@ -31,13 +31,13 @@ if (empty($user->activation) || substr($user->activation, 0, 10) !== $token) {
 
 // Check if already verified
 if (empty($user->activation)) {
-    ossn_trigger_message(ossn_print('diploma:alreadyverified'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:alreadyverified'), 'error');
     redirect(REF);
 }
 
 // Check for existing diploma upload
 if (Diploma::getByUserGuid($user_guid)) {
-    ossn_trigger_message(ossn_print('diploma:waitingadmin'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:waitingadmin'), 'error');
     redirect(REF);
 }
 
@@ -45,7 +45,7 @@ if (Diploma::getByUserGuid($user_guid)) {
 
 if (!isset($_FILES['ossn_diploma']) || $_FILES['ossn_diploma']['error'] !== UPLOAD_ERR_OK) {
     
-    ossn_trigger_message(ossn_print('diploma:upload:error'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:error'), 'error');
     redirect(REF);
 }
 
@@ -60,18 +60,18 @@ $ext  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 $mime = mime_content_type($file['tmp_name']);
 
 if (!in_array($ext, $allowed_ext) || !in_array($mime, $allowed_mime)) {
-    ossn_trigger_message(ossn_print('diploma:upload:invalidtype'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:invalidtype'), 'error');
     redirect(REF);
 }
 
 if ($file['size'] > $max_size) {
-    ossn_trigger_message(ossn_print('diploma:upload:toolarge'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:toolarge'), 'error');
     redirect(REF);
 }
     
 // Prevent path traversal
 if (strpos($file['name'], '..') !== false) {
-    ossn_trigger_message(ossn_print('diploma:upload:error'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:error'), 'error');
     redirect(REF);
 }
 // Prepare file object
@@ -87,8 +87,7 @@ $success = $diploma->addFile($file, $user_guid);
 
 
 if ($success) {
-    ossn_trigger_message(ossn_print('diploma:success'), 'success');
-    ossn_trigger_message(ossn_print('diploma:waitingadmin'), 'success');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:success'), 'success');
     
     //set user's last activity to :'1'
     $user = ossn_user_by_guid($user_guid);
@@ -107,10 +106,12 @@ if ($success) {
             redirect('home');
         }      
     }else{
-        ossn_trigger_message(ossn_print('diploma:usernotfound'), 'error');
+        ossn_trigger_message(ossn_print('staff:dipverif:diploma:usernotfound'), 'error');
         redirect('home');   
     } 
 }else {
-    ossn_trigger_message(ossn_print('diploma:upload:error'), 'error');
+    ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:error'), 'error');
     redirect('home');
 }
+
+        

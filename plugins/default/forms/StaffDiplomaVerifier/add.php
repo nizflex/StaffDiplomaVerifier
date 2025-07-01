@@ -12,7 +12,7 @@
 <input type="hidden" name="user_guid" value="<?php echo htmlspecialchars($params['user_guid']); ?>" />
 <input type="hidden" name="token" value="<?php echo htmlspecialchars($params['token']); ?>" />
 
-<label><?php echo ossn_print('diploma:upload:file'); ?></label>
+<label><?php echo ossn_print('staff:dipverif:diploma:upload:file'); ?></label>
 <input type="file" name="ossn_diploma"/>
 <div class="margin-top-10">
 	<input type="submit" class="btn btn-success btn-sm" value="<?php echo ossn_print('add'); ?>"/>

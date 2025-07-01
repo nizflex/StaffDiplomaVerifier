@@ -16,11 +16,11 @@ if (!defined('OSSN_ALLOW_SYSTEM_START')) {
 <div class="ossn-layout-contents">
     <div class="ossn-ads-form">
         <div class="ossn-form-header">
-            <h2><?php echo ossn_print('diploma:upload:title'); ?></h2>
+            <h2><?php echo ossn_print('staff:dipverif:diploma:upload:title'); ?></h2>
         </div>
         
         <div class="ossn-form-body">
-            <p><?php echo ossn_print('diploma:upload:instructions'); ?></p>
+            <p><?php echo ossn_print('staff:dipverif:diploma:upload:instructions'); ?></p>
             
             <?php 
             // Render the pre-built form from controller
@@ -30,8 +30,8 @@ if (!defined('OSSN_ALLOW_SYSTEM_START')) {
                 <div class="ossn-form-note">
                     <p>
                         <i class="fa fa-info-circle"></i>
-                        <?php echo ossn_print('diploma:formats'); ?>: JPG, PDF
-                        (<?php echo ossn_print('diploma:maxsize'); ?>: 5MB)
+                        <?php echo ossn_print('staff:dipverif:diploma:formats'); ?>
+                        <?php echo ossn_print('staff:dipverif:diploma:maxsize'); ?>
                     </p>
                 </div>
             </div>
