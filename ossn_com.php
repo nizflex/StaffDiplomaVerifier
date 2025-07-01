@@ -7,13 +7,17 @@
  * @copyright (C) 2025 Staff.ma
  * @license    General Public Licence
  * @link      https://www.staff.ma  || https://github.com/nizflex/
+ * @date	  2025-07-02
+ * @version   1.0
+ * @component StaffDiplomaVerifier
+ * @description Staff Diploma Verifier component for OSSN, allowing healthcare professionals to upload and verify     
+ *=====================================================================
  */
-
-// Informations du composant (nom, version, description, auteur, etc.)
-
+// Define the component path
 define('__STAFF_DIP_VERIF_', ossn_route()->com . 'StaffDiplomaVerifier/');
 
 require_once __STAFF_DIP_VERIF_ . 'classes/Diploma.php';
+
 
 function com_staff_diploma_verifier_init()
 {
@@ -47,7 +51,6 @@ function com_staff_diploma_verifier_init()
 			);
 			ossn_extend_view('css/ossn.admin.default', 'css/diploma_css');
 			ossn_register_page('pending_validations', 'pending_validations_page_handler');
-			ossn_register_action('ossnvds/delete', __STAFF_DIP_VERIF_ . 'actions/delete.php');
 			ossn_register_menu_item('admin/sidemenu', $pending_validations);
 	}
 	
@@ -88,38 +91,10 @@ function pending_validations_page_handler($pages){
 					$firstItem = $success->{'0'};
 					if (is_object($firstItem)) {
 						$filename = $firstItem->value;
-						error_log("Filename via property '0': " . $filename);
 						$firstItem->output();
 						echo $filename;
 					}
 					break;
-
-		case 'delete':
-			if(!empty($pages[1]) && !empty($pages[2])) {
-
-				//###############################################
-				// 1 Delete user from DB
-				//###############################################
-				$guid = $pages[1];	
-				if(!empty($guid)) {
-								$user = ossn_user_by_guid($guid);
-								if($user && $user->guid !== ossn_loggedin_user()->guid) {
-										if(!$user->deleteUser()) {
-												ossn_trigger_message(ossn_print('staff:dipverif:admin:user:delete:error'), 'error');
-										}
-								}	
-				}
-				ossn_trigger_message(ossn_print('admin:user:deleted'), 'success');
-			
-				//###############################################
-				// 2 Delete user's objects/entities from DB
-				//###############################################
-
-			
-				
-				}
-				redirect(REF);
-			break;
 	}
 }
 
@@ -203,6 +178,29 @@ function diploma_handle_upload_logic($user) {
 									
 		
 		return ossn_plugin_view('diploma/upload', array('form' => $params['content'], 'user_guid' => $user->guid, 'user_token' => substr($user->activation, 0, 10)));
+}
+
+function get_unvalidated_users_with_documents($search = '', $count = false) {
+    $users = new OssnUser;
+    if($count) {
+            $params['count'] = true;
+    }
+    if(empty($search)) {
+            $params['wheres'] = array(
+                    "activation <> ''","last_activity <> '0'",
+            );
+    } else {
+            $params['wheres'] = array(
+                    "activation <> ''", "last_activity <> '0'",
+                    "CONCAT(first_name, ' ', last_name) LIKE '%$search%' AND activation <> '' OR
+                  username LIKE '%$search%' AND activation <> '' OR email LIKE '%$search%' AND activation <> ''",
+            );
+    }
+    $result = $users->searchUsers($params);
+    if($result) {
+            return $result;
+    }
+    return false;
 }
 
 ossn_register_callback('ossn', 'init', 'com_staff_diploma_verifier_init');
