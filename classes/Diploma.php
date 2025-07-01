@@ -99,8 +99,8 @@ class Diploma extends OssnFile {
 		 * @return object
 		 */
 		public function getDiplomaFile() {
+
 				if(!empty($this->type) && !empty($this->owner_guid) && !empty($this->subtype)) {
- error_log("getDiplomaFile:: type: {$this->type}, owner_guid: {$this->owner_guid}, subtype: {$this->subtype}");                   
 						$this->filetype = "file:{$this->subtype}";
 						$this->subtype  = preg_replace('/file:file:/i', 'file:', $this->filetype);
 						$this->order_by = 'guid DESC';
@@ -114,20 +114,18 @@ class Diploma extends OssnFile {
 								return arrayObject($datafiles, get_class($this));
 						}
 				}
-error_log("getDiplomaFile:: Please check the parameters passed to getDiplomaFile. Ensure type, owner_guid, and subtype are set correctly.");
 				return false;
 		}
-
-        public function getExtension() {
-            // Get the first diploma object safely
-            $diplomaObject = $this->{0} ?? null;
-            
-            if ($diplomaObject && property_exists($diplomaObject, 'value')) {
-                $fileValue = $diplomaObject->value;            
-                // Get extension
-                return pathinfo($fileValue, PATHINFO_EXTENSION);
-            }
-            return '';
+       public function getExtension() {
+        // Get the first diploma object safely
+        $diplomaObject = $this->{0} ?? null;
+        
+        if ($diplomaObject && property_exists($diplomaObject, 'value')) {
+            $fileValue = $diplomaObject->value;            
+            // Get extension
+            return pathinfo($fileValue, PATHINFO_EXTENSION);
+        }
+        return '';
         }
 
 }
