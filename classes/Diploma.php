@@ -99,7 +99,6 @@ class Diploma extends OssnFile {
 		 * @return object
 		 */
 		public function getDiplomaFile() {
-
 				if(!empty($this->type) && !empty($this->owner_guid) && !empty($this->subtype)) {
 						$this->filetype = "file:{$this->subtype}";
 						$this->subtype  = preg_replace('/file:file:/i', 'file:', $this->filetype);
@@ -117,35 +116,16 @@ class Diploma extends OssnFile {
 				return false;
 		}
 
-        /**
-		 * Get user vds.
-		 *
-		 * @param array $params option values
-		 * @param boolean $random do you wanted to see vds in ramdom order?
-		 *
-		 * @return array|boolean|integer
-		 */
-		public function getVds2($guid,array $params = array()) {
-				$options = array(
-						'owner_guid' => $guid,
-						'type'       => 'user',
-						'subtype'    => 'diploma:file',
-				);
-				
-				$args = array_merge($options, $params);
-				return $this->searchObject($args);
-		}
-
-       public function getExtension() {
-        // Get the first diploma object safely
-        $diplomaObject = $this->{0} ?? null;
-        
-        if ($diplomaObject && property_exists($diplomaObject, 'value')) {
-            $fileValue = $diplomaObject->value;            
-            // Get extension
-            return pathinfo($fileValue, PATHINFO_EXTENSION);
-        }
-        return '';
+        public function getExtension() {
+            // Get the first diploma object safely
+            $diplomaObject = $this->{0} ?? null;
+            
+            if ($diplomaObject && property_exists($diplomaObject, 'value')) {
+                $fileValue = $diplomaObject->value;            
+                // Get extension
+                return pathinfo($fileValue, PATHINFO_EXTENSION);
+            }
+            return '';
         }
 
 }

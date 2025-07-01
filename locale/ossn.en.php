@@ -31,13 +31,7 @@ $en = array(
 		'staff:dipverif:diploma:waitingadmin' => 'Your diploma has been submitted and is awaiting admin review.',
 		'staff:dipverif:diploma:formats' => 'Accepted formats: JPG, PNG and PDF. ',
         'staff:dipverif:diploma:maxsize'  => 'Maximum file size: 5MB',
-		'staff:dipverif:diploma:usernotfound' => 'User not found!',
-		'staff:dipverif:              ' => '',
-		
-		
-
-                
-                             		
+		'staff:dipverif:diploma:usernotfound' => 'User not found!'		
 		
 );
 ossn_register_languages('en', $en);
