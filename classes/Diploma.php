@@ -7,6 +7,9 @@
  * @author Nizone
  * @copyright 2025 Staff (c)
  * @link https://www.ossn.com/
+ * @version 1.0
+ * @created 22-06-2025
+ * @last-modified 05-07-2025
  */
 
 class Diploma extends OssnFile {

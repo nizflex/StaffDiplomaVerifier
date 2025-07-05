@@ -8,6 +8,7 @@
  * @license    General Public Licence
  * @link      https://www.staff.ma  || https://github.com/nizflex/
  * @date	  2025-07-02
+ * @last-modified 05-07-2025
  * @version   1.0
  * @component StaffDiplomaVerifier
  * @description Staff Diploma Verifier component for OSSN, allowing healthcare professionals to upload and verify     

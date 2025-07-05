@@ -17,7 +17,7 @@ $en = array(
 		'staff:dipverif:email:confirmation:pending' => 'You did not confirm your email address yet - check your incoming mails, please.',
 		'staff:dipverif:activation:pending' => 'Stay tuned - the admin has been notified - your account will be activated soon.',
 		'staff:dipverif:diploma:upload:title' => 'Upload diploma or certification',
-		'staff:dipverif:diploma:upload:pending' => 'You did not confirm your email address yet - check your incoming mails, please.',
+		'staff:dipverif:diploma:upload:pending' => 'You did not upload your diploma yet - check your incoming mails, click on the upload link and follow the instructions.',
 		'staff:dipverif:diploma:upload:invalidtype' => 'Invalid file type. Only JPG, PNG and PDF are allowed.',
 		'staff:dipverif:diploma:upload:toolarge' => 'File is too large. Maximum allowed size is 5MB.',
 		'staff:dipverif:diploma:upload:error' => 'There was a problem uploading your diploma. Please try again.',
@@ -31,7 +31,8 @@ $en = array(
 		'staff:dipverif:diploma:waitingadmin' => 'Your diploma has been submitted and is awaiting admin review.',
 		'staff:dipverif:diploma:formats' => 'Accepted formats: JPG, PNG and PDF. ',
         'staff:dipverif:diploma:maxsize'  => 'Maximum file size: 5MB',
-		'staff:dipverif:diploma:usernotfound' => 'User not found!'		
+		'staff:dipverif:diploma:usernotfound' => 'User not found!'
+
 		
 );
 ossn_register_languages('en', $en);

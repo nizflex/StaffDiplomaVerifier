@@ -1,12 +1,18 @@
 <?php
 /**
- * Open Source Social Network
+ * Staff.ma - The Healthcare Social Network
  *
- * @package   (openteknik.com).ossn
- * @author    OSSN Core Team <info@openteknik.com>
- * @copyright (C) OpenTeknik LLC
- * @license   Open Source Social Network License (OSSN LICENSE)  http://www.opensource-socialnetwork.org/licence
- * @link      https://www.opensource-socialnetwork.org/
+ * @package   Open Source Social Network
+ * @author    Nizone dev.
+ * @copyright (C) 2025 Staff.ma
+ * @license    General Public Licence
+ * @link      https://www.staff.ma  || https://github.com/nizflex/
+ * @date	  2025-07-02
+ * @last-modified 05-07-2025
+ * @version   1.0
+ * @component StaffDiplomaVerifier
+ * @description this file handles user login for pending diploma uploads or pending accounts validations for the Staff Diploma Verifier component.     
+ *=====================================================================
  */
 
 if(ossn_isLoggedin()) {
@@ -30,9 +36,9 @@ if(strpos($username, '@') !== false) {
 if($user && !$user->isUserVALIDATED()) {
 	// changed not to resend multiple verification emails
 	if (!$user->last_activity) {
-		ossn_trigger_message(ossn_print('com:disable:member:self:validating:validated:confirmation:pending'), 'error');
+		ossn_trigger_message(ossn_print('staff:dipverif:diploma:upload:pending'), 'error');
 	} else {
-		ossn_trigger_message(ossn_print('com:disable:member:self:validating:validated:activation:pending'), 'success');
+		ossn_trigger_message(ossn_print('staff:dipverif:activation:pending'), 'success');
 	}
 	redirect(REF);
 }
