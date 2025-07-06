@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component xmlns="http://www.opensource-socialnetwork.org/v/3.0">
-    <name>Staff Profile Features</name>
-    <id>StaffProfileFeatures</id>
+    <name>Staff Pro. Diploma Verifier</name>
+    <id>StaffDiplomaVerifier</id>
     <author>Nizone</author>
-    <description>Adds new specificities to staff users profile for example: user category (pro, patient, partner)</description>
+    <description>Asks health professional users to upload their diploma so that admins can check it and approve/reject their membership</description>
     <license>Staff.ma</license>
     <author_url>https://www.Staff.ma/</author_url>
     <license_url>http://www.opensource-socialnetwork.org/licence/</license_url>
